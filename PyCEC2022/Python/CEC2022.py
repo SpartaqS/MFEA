@@ -747,7 +747,14 @@ class cec2022_func():
 
     def values(self, x):
 
-        nx, mx = np.shape(x)
+        shape = np.shape(x)
+        if len(shape) == 2:
+            nx, mx = shape
+        else:
+            nx = shape[0]
+            mx = 1
+            x = x.reshape((nx, 1))  # Ensure x is 2D so x[:, i] works
+        # nx, mx = np.shape(x)
         ObjFunc = np.zeros((mx,))
         for i in range(mx):
             ObjFunc[i] = cec22_test_func(x[:, i], nx, 1, self.func)

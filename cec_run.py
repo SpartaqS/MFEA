@@ -12,11 +12,12 @@ if __name__ == "__main__":
     # TotalEvaluations, bestobj, bestind = mfea(tasks)
     # tasks = CI_HS()
 
-    CEC1 = cec2022_func(func_num=1)
+    # func_num=2 <-- Rosenbrock with shifts
+    CEC1 = cec2022_func(func_num=2)
     CEC2 = cec2022_func(func_num=2)
 
     tasks = [Task(10, CEC1.calcValues, -100, 100),
-             Task(10, CEC1.calcValues, -50, 50)]
+             Task(10, CEC1.calcValues, -110, 110)]
     print('starting task')
     TotalEvaluations, bestobj, bestind = mfea(tasks, reps=1)
     print('ending task')
