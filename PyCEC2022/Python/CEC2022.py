@@ -736,7 +736,7 @@ def getAbsolutePath(neededFilePath):
     # TODO : actually get full path (remove hardcoding)
     # currentPath = os.getcwd()
     # cec2022InProjectPath = '\Python-CEC2022\Python'
-    return 'D:/Github/MFEA/Python-CEC2022/Python/' + neededFilePath
+    return 'D:/Github/MFEA/PyCEC2022/Python/' + neededFilePath
 
 
 class cec2022_func():
