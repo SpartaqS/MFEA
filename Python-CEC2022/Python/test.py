@@ -12,8 +12,14 @@ nx = 10
 mx = 10
 fx_n = 12
 
-CEC = cec2022_func(func_num = fx_n)
+CEC = cec2022_func(func_num=fx_n)
 
-x = 200.0*np.random.rand(nx,mx)*0.0-100.0
-F = CEC.values(x)
-print(F.ObjFunc)
+x = 200.0*np.random.rand(nx, mx)*0.0-100.0
+
+# F = CEC.values(x)
+# print(F.ObjFunc)
+# F = CEC.values(x).ObjFunc
+# print(F)
+
+F = CEC.calcValues(x)
+print(F)
