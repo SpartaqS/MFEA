@@ -1,9 +1,10 @@
 from BENCHMARK.basic import Ackley, Griewank, Rastrigin, Rosenbrock, \
-                                Schwefel, Sphere, Weierstrass
+    Schwefel, Sphere, Weierstrass
 from BENCHMARK.task import Task
 
 import scipy.io as sio
 import os
+
 
 def mat2python(filename, flags):
     path = os.path.abspath(os.path.dirname(__file__))
@@ -12,14 +13,15 @@ def mat2python(filename, flags):
     names = ['GO_Task1', 'GO_Task2', 'Rotation_Task1', 'Rotation_Task2']
     parameters = []
     for i, flag in enumerate(flags):
-        if flag!= None:
+        if flag != None:
             name = names[i]
             parameters.append(data[name])
         else:
             parameters.append(None)
     return parameters
 
-def CI_HS(filename = '\Tasks\CI_H.mat'):
+
+def CI_HS(filename='\Tasks\CI_H.mat'):
     #  Complete Intersection and High Similarity (CI+HS)
     flags = ['GO_Task1', 'GO_Task2', 'Rotation_Task1', 'Rotation_Task2']
     params = mat2python(filename, flags)
@@ -29,7 +31,8 @@ def CI_HS(filename = '\Tasks\CI_H.mat'):
              Task(50, Task2.fnc, -50, 50)]
     return tasks
 
-def CI_MS(filename = '\Tasks\CI_M.mat'):
+
+def CI_MS(filename='\Tasks\CI_M.mat'):
     # Complete Intersection and Medium Similarity (CI+MS)
     flags = ['GO_Task1', 'GO_Task2', 'Rotation_Task1', 'Rotation_Task2']
     params = mat2python(filename, flags)
@@ -39,9 +42,10 @@ def CI_MS(filename = '\Tasks\CI_M.mat'):
              Task(50, Task2.fnc, -50, 50)]
     return tasks
 
-def CI_LS(filename = '\Tasks\CI_L.mat'):
+
+def CI_LS(filename='\Tasks\CI_L.mat'):
     #  Complete Intersection and Low Similarity
-    flags = ['GO_Task1', None, 'Rotation_Task1',None]
+    flags = ['GO_Task1', None, 'Rotation_Task1', None]
     params = mat2python(filename, flags)
     Task1 = Ackley(M=params[2], opt=params[0])
     Task2 = Schwefel()
@@ -49,19 +53,21 @@ def CI_LS(filename = '\Tasks\CI_L.mat'):
              Task(50, Task2.fnc, -500, 500)]
     return tasks
 
-def PI_HS(filename = '\Tasks\PI_H.mat'):
+
+def PI_HS(filename='\Tasks\PI_H.mat'):
     #  Partial Intersection and High Similarity (PI+HS)
     flags = ['GO_Task1', 'GO_Task2', 'Rotation_Task1', None]
     params = mat2python(filename, flags)
     Task1 = Rastrigin(M=params[2], opt=params[0])
-    Task2 = Sphere(opt= params[1])
+    Task2 = Sphere(opt=params[1])
     tasks = [Task(50, Task1.fnc, -50, 50),
              Task(50, Task2.fnc, -100, 100)]
     return tasks
 
-def PI_MS(filename = '\Tasks\PI_M.mat'):
+
+def PI_MS(filename='\Tasks\PI_M.mat'):
     # Partial Intersection and Medium Similarity (PI+MS)
-    flags = ['GO_Task1',None, 'Rotation_Task1', None]
+    flags = ['GO_Task1', None, 'Rotation_Task1', None]
     params = mat2python(filename, flags)
     Task1 = Ackley(M=params[2], opt=params[0])
     Task2 = Rosenbrock()
@@ -69,7 +75,8 @@ def PI_MS(filename = '\Tasks\PI_M.mat'):
              Task(50, Task2.fnc, -50, 50)]
     return tasks
 
-def PI_LS(filename = '\Tasks\PI_L.mat'):
+
+def PI_LS(filename='\Tasks\PI_L.mat'):
     # Partial Intersection and Low Similarity (PI+LS)
     flags = ['GO_Task1', 'GO_Task2', 'Rotation_Task1', 'Rotation_Task2']
     params = mat2python(filename, flags)
@@ -79,7 +86,8 @@ def PI_LS(filename = '\Tasks\PI_L.mat'):
              Task(25, Task2.fnc, -0.5, 0.5)]
     return tasks
 
-def NI_HS(filename = r'\Tasks\NI_H.mat'):
+
+def NI_HS(filename=r'\Tasks\NI_H.mat'):
     # No Intersection and High Similarity
     flags = [None, 'GO_Task2', None, 'Rotation_Task2']
     params = mat2python(filename, flags)
@@ -89,7 +97,8 @@ def NI_HS(filename = r'\Tasks\NI_H.mat'):
              Task(50, Task2.fnc, -50, 50)]
     return tasks
 
-def NI_MS(filename = r'\Tasks\NI_M.mat'):
+
+def NI_MS(filename=r'\Tasks\NI_M.mat'):
     # No Intersection and Medium Similarity (NI+MS)
     flags = ['GO_Task1', 'GO_Task2', 'Rotation_Task1', 'Rotation_Task2']
     params = mat2python(filename, flags)
@@ -99,12 +108,22 @@ def NI_MS(filename = r'\Tasks\NI_M.mat'):
              Task(50, Task2.fnc, -0.5, 0.5)]
     return tasks
 
-def NI_LS(filename = r'\Tasks\NI_L.mat'):
+
+def NI_LS(filename=r'\Tasks\NI_L.mat'):
     # No Intersection and Low Similarity (NI+LS)
-    flags = ['GO_Task1',None, 'Rotation_Task1',None]
+    flags = ['GO_Task1', None, 'Rotation_Task1', None]
     params = mat2python(filename, flags)
     Task1 = Rastrigin(M=params[2], opt=params[0])
     Task2 = Schwefel()
     tasks = [Task(50, Task1.fnc, -50, 50),
              Task(50, Task2.fnc, -500, 500)]
+    return tasks
+
+
+def DoubleRosenbrock():
+    # Test: Double Rosenbrock
+    Task1 = Rosenbrock()
+    Task2 = Rosenbrock()
+    tasks = [Task(10, Task1.fnc, -100, 100),
+             Task(10, Task2.fnc, -50, 50)]
     return tasks
