@@ -1,3 +1,4 @@
+import copy
 from MFEA.individual import Individual
 from MFEA.operators import crossover, mutate, RouletteWheelSelection
 
@@ -164,6 +165,10 @@ def mfea(tasks,
                 print('Best objective of tasks : ', end='')
                 print(best_tmp)
 
+                if generation == 0:
+                    bestObjAt0 = copy.deepcopy(best_tmp)
+                    bestindAt0 = copy.deepcopy(bestind)
+
         print('Generation ' + str(generation) + ' :')
         print('Best objective of tasks : ', end='')
         print(best_tmp)
@@ -173,7 +178,10 @@ def mfea(tasks,
             nnn = np.argmin(factorial_costs[:, j])
             bestind[rep, j, :dim] = population[nnn].rnvec[:dim]
 
+        bestObjAtEnd = copy.deepcopy(best_tmp)
+        bestindAtEnd = copy.deepcopy(bestind[0, -1])
+
     if plot == True:
         pass
 
-    return TotalEvaluations, bestobj, bestind
+    return TotalEvaluations, bestobj, bestind, bestObjAt0, bestindAt0, bestObjAtEnd, bestindAtEnd
